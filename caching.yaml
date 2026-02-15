@@ -1,0 +1,26 @@
+name: Cache Setup
+
+on: [push, workflow_dispatch]
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Create a dummy file so the cache has something to save
+      - name: Generate dummy data
+        run: echo "Caching data for 26f6488" > my-cache-file.txt
+
+      # The required cache step
+      - name: Restore/Save Cache
+        id: my-cache
+        uses: actions/cache@v4
+        with:
+          path: my-cache-file.txt
+          key: cache-26f6488
+
+      # The required verification step
+      - name: prime-cache-26f6488
+        run: echo "Cache hit: ${{ steps.my-cache.outputs.cache-hit }}"
