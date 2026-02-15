@@ -1,0 +1,14 @@
+name: Identity Check
+
+on: [push]
+
+jobs:
+  email-verification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # THIS IS THE REQUIRED STEP
+      - name: 23f3003596@ds.study.iitm.ac.in
+        run: echo "Verifying user identity..."
